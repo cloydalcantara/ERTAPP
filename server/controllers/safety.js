@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken');
-const Model = require('../models/agency-registration');
+const Model = require('../models/safety');
 const { JWT_SECRET } = require('../configuration');
 
 module.exports = {
@@ -11,13 +11,7 @@ module.exports = {
     res.json({ data: save });
   },
   fetchAll: async (req, res, next) => {
-    const query = req.query
-    const find = await Model.find({}).exec()
-    res.json({data: find})
-  },
-  fetchRegistered: async (req, res, next) => {
-    const query = req.query
-    const find = await Model.find({status:true}).exec()
+    const find = await Model.find({}).populate({path:'name'}).exec()
     res.json({data: find})
   },
   fetchSingle: async (req, res, next) => {
@@ -30,9 +24,14 @@ module.exports = {
   },
   update: async (req, res, next) => {
     const data = req.body
-    console.log(req.params.id)
+    console.log(data)
     const update = await Model.findOneAndUpdate({_id:req.params.id},{$set:data}).exec()
     console.log(update)
     res.json({data: update})
+  },
+  delete: async (req, res, next) => {
+    const remove = await Model.findByIdAndRemove({_id:req.params.id}).exec()
+    console.log(remove)
+    res.json({data: remove})
   }
 }

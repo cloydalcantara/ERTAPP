@@ -9,7 +9,10 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 router.route('/agency-registration')
   .post(agencyRegistration.add);
 
-router.route('/agency-registration/all')
+router.route('/agency-registration/registered')
+  .get(agencyRegistration.fetchRegistered);
+
+  router.route('/agency-registration/all')
   .get(agencyRegistration.fetchAll);
 
 router.route('/agency-registration/:id')
@@ -20,5 +23,6 @@ router.route('/agency-registration/delete/:id')
 
 router.route('/agency-registration/update/:id')
   .put(agencyRegistration.update);
+  
 
 module.exports = router;

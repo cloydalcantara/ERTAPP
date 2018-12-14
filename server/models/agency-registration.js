@@ -19,7 +19,8 @@ const agencySchema = new Schema({
   },
   lat: {
     type: String
-  }
+  },
+  status: Boolean
 });
 
 // Create a model

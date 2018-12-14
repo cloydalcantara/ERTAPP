@@ -15,17 +15,18 @@ signToken = user => {
 module.exports = {
   signUp: async (req, res, next) => {
     const { email, password, firstName, lastName, middleName, suffix, userType, agencyId, agencyName } = req.body;
-    
+    console.log(req.body)
     // Check if there is a user with the same email
     const foundUser = await User.findOne({ "local.email": email });
-    const foundAgency = await User.findOne({ name: agencyName });
+    const foundAgency = await Agency.findOne({ name: agencyName });
     if (foundUser || foundAgency) { 
-      return res.status(403).json({ error: 'Email is already in use'});
+      return res.status(403).json({ error: 'Email/Agency is already exists!'});
     }
 
     if(agencyName){
       const newAgency = new Agency({
-        name: agencyName
+        name: agencyName,
+        status: false
       })
       
       const saveNewAgency = await newAgency.save();
@@ -125,5 +126,16 @@ module.exports = {
   secret: async (req, res, next) => {
     console.log('I managed to get here!');
     res.json({ secret: "resource" });
+  },
+  fetchAll: async( req, res, next ) => {
+    const user = await User.find({"local.userType":{$ne: "Admin"}}).exec()
+    res.json({data: user})
+  },
+  update: async (req, res, next) => {
+    const data = req.body
+    console.log(req.params.id)
+    const update = await User.findOneAndUpdate({_id:req.params.id},{$set:data}).exec()
+    console.log(update)
+    res.json({data: update})
   }
 }

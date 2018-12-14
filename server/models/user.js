@@ -45,7 +45,8 @@ const userSchema = new Schema({
     lastName: { type: String },
     middleName: { type: String },
     suffix: { type: String }
-  }
+  },
+  status: Boolean
 });
 
 userSchema.pre('save', async function(next) {

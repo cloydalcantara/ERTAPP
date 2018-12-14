@@ -26,4 +26,10 @@ router.route('/management/learning/strands')
 router.route('/secret')
   .get(passportJWT, UsersController.secret);
 
+router.route('/users/all')
+  .get( UsersController.fetchAll )
+
+router.route('/users/update/:id')
+  .put(UsersController.update);
+  
 module.exports = router;

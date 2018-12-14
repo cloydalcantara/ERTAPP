@@ -24,5 +24,8 @@ app.use(bodyParser.json());
 // Routes
 app.use('/bfp-api', require('./routes/users'));
 app.use('/bfp-api', require('./routes/agency-registration'));
+app.use('/bfp-api', require('./routes/incident-management'));
+app.use('/bfp-api', require('./routes/safety'));
+app.use('/bfp-api', require('./routes/incident'));
 
 module.exports = app;
