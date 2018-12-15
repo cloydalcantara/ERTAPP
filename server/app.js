@@ -6,9 +6,9 @@ const cors = require('cors');
 
 mongoose.Promise = global.Promise;
 if (process.env.NODE_ENV === 'test') {
-  mongoose.connect('mongodb://localhost/APIAuthenticationTEST', { useMongoClient: true });
+  mongoose.connect('mongodb://localhost/ERTAPP', { useMongoClient: true });
 } else {
-  mongoose.connect('mongodb://localhost/APIAuthentication', { useMongoClient: true });
+  mongoose.connect('mongodb://localhost/ERTAPP', { useMongoClient: true });
 }
 
 const app = express();

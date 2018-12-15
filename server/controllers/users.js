@@ -40,13 +40,15 @@ module.exports = {
             userType: userType
           },
           personalInformation: {
-            agencyId:saveNewAgency._id,
             firstName:firstName,
             lastName:lastName,
             middleName:middleName,
             suffix: suffix
           }
         });
+        if(agencyId){
+          newUser.personalInformation.agencyId = agencyId
+        }
     
         await newUser.save();
     
@@ -65,13 +67,15 @@ module.exports = {
             userType: userType
           },
           personalInformation: {
-            agencyId:agencyId ? agencyId : '',
             firstName:firstName,
             lastName:lastName,
             middleName:middleName,
             suffix: suffix
           }
         }); 
+        if(agencyId){
+          newUser.personalInformation.agencyId = agencyId
+        }
         await newUser.save();
   
         // Generate the token
